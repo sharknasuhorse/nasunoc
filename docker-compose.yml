@@ -89,7 +89,6 @@ services:
         image: robcowart/elastiflow-logstash-oss:3.5.1
         container_name: elastiflow-logstash-oss
         restart: always
-        network_mode: host
         environment:
             LS_JAVA_OPTS: '-Xms4g -Xmx4g'
             ELASTIFLOW_DEFAULT_APPID_SRCTYPE: "__UNKNOWN"
