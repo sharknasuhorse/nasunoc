@@ -98,6 +98,7 @@ services:
             ELASTIFLOW_NETFLOW_IPV4_PORT: 2055
             ELASTIFLOW_SFLOW_IPV4_PORT: 6343
             ELASTIFLOW_IPFIX_TCP_IPV4_PORT: 4739
+            ELASTIFLOW_ES_HOST: "elastiflow-elasticsearch-oss:9200"
         depends_on:
             - elastiflow-elasticsearch-oss
         ports:
