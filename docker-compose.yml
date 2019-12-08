@@ -51,10 +51,10 @@ services:
         image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.3.0
         container_name: elastiflow-elasticsearch-oss
         restart: always
-        ulimits:
-            memlock:
-            soft: -1
-            hard: -1
+#        ulimits:
+#            memlock:
+#            soft: -1
+#            hard: -1
         volumes:
             - ./volumes/elastiflow_es:/usr/share/elasticsearch/data
         environment:
@@ -120,11 +120,11 @@ services:
         volumes:
             - ./volumes/grafana:/var/lib/grafana
         user: "104"
-        #environment:
-            #- GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/grafana
-            #- GF_SERVER_DOMAIN=ictsc.local
-            #- GF_SERVER_ROOT_URL=https://ictsc.local/grafana
-            #- GF_AUTH.BASIC_ENABLED=false
+#        environment:
+#            - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/grafana
+#            - GF_SERVER_DOMAIN=ictsc.local
+#            - GF_SERVER_ROOT_URL=https://ictsc.local/grafana
+#            - GF_AUTH.BASIC_ENABLED=false
         ports:
             - 3000:3000
 
@@ -132,7 +132,7 @@ services:
         container_name: unbound
         image: mvance/unbound:1.9.5
         restart: always
-    #       volumes:
+#       volumes:
 #           - ./volumes/influxdb:/var/lib/influxdb
 #        ports:
 #            - 53:53/udp
@@ -142,8 +142,8 @@ services:
         container_name: nginx
         image: nginx:1.17.6-alpine
         restart: always
-    #   volumes:
-    #     - ./volumes/influxdb:/var/lib/influxdb
+#       volumes:
+#           - ./volumes/influxdb:/var/lib/influxdb
         ports:
             - 80:80
             - 443:443
