@@ -36,3 +36,10 @@
 - zabbix-agent
 
 
+## usage
+
+```
+mkdir volumes
+chmod 777 volumes/elastiflow_es
+chmod 777 volumes/grafana
+```
