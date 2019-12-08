@@ -81,7 +81,7 @@ services:
             LOGGING_DEST: stdout
             LOGGING_QUIET: 'false'
         ports:
-            - 5600:5600
+            - 5601:5601
         depends_on:
             - elastiflow-elasticsearch-oss    
 
