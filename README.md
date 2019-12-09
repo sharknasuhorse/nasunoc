@@ -43,3 +43,10 @@ mkdir volumes
 chmod 777 volumes/elastiflow_es
 chmod 777 volumes/grafana
 ```
+
+
+if use ubuntu 18
+```
+sudo systemctl stop systemd-resolved
+sudo systemctl disalbe systemd-resolved
+```
