@@ -149,13 +149,13 @@ services:
             - 443:443
 
     logstash_syslog:
-        image: docker.elastic.co/logstash/logstash:7.4.0
+        image: docker.elastic.co/logstash/logstash-oss:7.3.0
         container_name: logstash_syslog
         volumes:
             - ./logstash-syslog/:/usr/share/logstash/pipeline
         ports:
-            - 514:514/udp
-            - 514:514/tcp
+            - 514:5140/udp
+            - 514:5140/tcp
         depends_on:
             - elastiflow-elasticsearch-oss
 
