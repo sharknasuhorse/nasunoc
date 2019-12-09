@@ -133,11 +133,11 @@ services:
         container_name: unbound
         image: mvance/unbound:1.9.5
         restart: always
-#       volumes:
-#           - ./volumes/influxdb:/var/lib/influxdb
-#        ports:
-#            - 53:53/udp
-#            - 53:53/tcp
+        volumes:
+            - ./unbound:/opt/unbound/etc/unbound
+        ports:
+            - 53:53/udp
+            - 53:53/tcp
 
     nginx:
         container_name: nginx
