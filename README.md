@@ -50,3 +50,13 @@ if use ubuntu 18
 sudo systemctl stop systemd-resolved
 sudo systemctl disalbe systemd-resolved
 ```
+
+
+
+self sign
+```
+mkdir nginx/ssl-key
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./nginx/ssl-key/nginx-selfsigned.key -out ./nginx/ssl-key/nginx-selfsigned.crt
+```
+
+
