@@ -5,6 +5,7 @@ services:
         image: zabbix/zabbix-server-mysql:alpine-4.4.3
         restart: always
         ports:
+            - "162:162/udp"
             - "10051:10051"            
         environment:
             - DB_SERVER_HOST=zabbix_db
