@@ -48,9 +48,9 @@ services:
         volumes:
             - ./volumes/mysql:/var/lib/mysql
 
-    elastiflow-elasticsearch-oss:
-        image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.3.0
-        container_name: elastiflow-elasticsearch-oss
+    elastiflow-elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+        container_name: elastiflow-elasticsearch
         restart: always
 #        ulimits:
 #            memlock:
@@ -69,26 +69,26 @@ services:
             search.max_buckets: 100000
             action.destructive_requires_name: 'true'
 
-    elastiflow-kibana-oss:
-        image: docker.elastic.co/kibana/kibana-oss:7.3.0
-        container_name: elastiflow-kibana-oss
+    elastiflow-kibana:
+        image: docker.elastic.co/kibana/kibana:7.5.2
+        container_name: elastiflow-kibana
         restart: always
         environment:
             SERVER_HOST: 0.0.0.0
             SERVER_PORT: 5601
             SERVER_MAXPAYLOADBYTES: 4194304
-            ELASTICSEARCH_HOSTS: "http://elastiflow-elasticsearch-oss:9200"
+            ELASTICSEARCH_HOSTS: "http://elastiflow-elasticsearch:9200"
             KIBANA_DEFAULTAPPID: "dashboard/653cf1e0-2fd2-11e7-99ed-49759aed30f5"
             LOGGING_DEST: stdout
             LOGGING_QUIET: 'false'
         ports:
             - 5601:5601
         depends_on:
-            - elastiflow-elasticsearch-oss    
+            - elastiflow-elasticsearch 
 
-    elastiflow-logstash-oss:
-        image: robcowart/elastiflow-logstash-oss:3.5.1
-        container_name: elastiflow-logstash-oss
+    elastiflow-logstash:
+        image: robcowart/elastiflow-logstash-oss:4.0.0-beta
+        container_name: elastiflow-logstash
         restart: always
         environment:
             LS_JAVA_OPTS: '-Xms4g -Xmx4g'
@@ -98,11 +98,12 @@ services:
             ELASTIFLOW_NETFLOW_IPV4_PORT: 2055
             ELASTIFLOW_SFLOW_IPV4_PORT: 6343
             ELASTIFLOW_IPFIX_TCP_IPV4_PORT: 4739
-            ELASTIFLOW_ES_HOST: "elastiflow-elasticsearch-oss:9200"
+            ELASTIFLOW_ES_HOST: "elastiflow-elasticsearch:9200"
         depends_on:
-            - elastiflow-elasticsearch-oss
+            - elastiflow-elasticsearch
         ports:
             - 2055:2055/udp
+            - 4739:4739/tcp
 
     influxdb:
         image: influxdb:1.7.9-alpine
@@ -160,7 +161,7 @@ services:
             - 514:5140/udp
             - 514:5140/tcp
         depends_on:
-            - elastiflow-elasticsearch-oss
+            - elastiflow-elasticsearch
     ntp:
         image: cturra/ntp:latest
         container_name: ntp
